@@ -9,4 +9,17 @@
   <artifactId>erp-manager</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
+  
+    <dependencies>
+  	<dependency>
+  	  	<groupId>com.retail</groupId>
+    		<artifactId>erp-common</artifactId>
+    		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
+  <modules>
+  	<module>erp-manager-interface</module>
+  	<module>erp-manager-pojo</module>
+  	<module>erp-manager-service</module>
+  </modules>
 </project>

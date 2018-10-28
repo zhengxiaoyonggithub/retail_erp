@@ -15,4 +15,42 @@
 			</if>
 		</where>
 	</select>
+	
+	<select id="getMenuRecordCount" resultType="int" parameterType="com.retailerp.common.pojo.web.sys.MenuQueryPageParameter">
+		select count(1) from sys_menu
+		
+		<where>
+			<if test="name!=null and name!=''">
+				and name like CONCAT('%',#{name},'%') 
+			</if>
+		</where>
+	</select>
+	
+	<select id="getMenus" parameterType="com.retailerp.common.pojo.web.sys.MenuQueryPageParameter" resultType="com.retailerp.pojo.sys.Menu"  >
+		select * from sys_menu 
+		
+		<where>
+			<if test="name!=null and name!=''">
+				and name like CONCAT('%',#{name},'%') 
+			</if>
+		</where>
+		
+		limit #{startRow},#{limit}
+	</select>
+	
+	
+	<select id="findMenuById" parameterType="int" resultType="com.retailerp.pojo.sys.Menu">
+		select * from sys_menu where id = #{id}
+	</select>
+	
+	
+	<delete id="delMenuById" parameterType="int">
+		delete from sys_menu where id = #{id}
+	</delete>
+	
+	<update id="updateMenu" parameterType="com.retailerp.pojo.sys.Menu">
+		update sys_menu 
+		set name = #{name}, url = #{url}, updateTime=#{updateTime},status=#{status}
+		where id = #{id}
+	</update>
 </mapper>

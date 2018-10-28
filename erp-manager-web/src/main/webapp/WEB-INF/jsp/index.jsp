@@ -7,8 +7,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>layout 后台大布局 - Layui</title>
+<title>RETAIL_ERP</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/plugins/layui/css/layui.css">
+<link rel="icon" href="http://img.bj.wezhan.cn/2011844_favicon.ico?t=201703101037222406" />
 <style type="text/css">
 	.layui-tab-item{
 		width:100%; 
@@ -104,17 +105,11 @@ $(".menuItem").click(function(){
 });
 
 
-function showDialog(url,t,closeFuc){
-	var iii = 111;
-	var index = layer.open({
-		  type: 2,
-		  content: url,
-		  area: ['320px', '195px'],
-		  maxmin: true,
-		  end:function(){
-			  closeFuc(iii);
-		  }
-	});
+function showDialog(options){
+	var paras = { };
+	$.extend(paras, options);
+	console.log(paras);
+	var index = layer.open(paras);
 }
 
 

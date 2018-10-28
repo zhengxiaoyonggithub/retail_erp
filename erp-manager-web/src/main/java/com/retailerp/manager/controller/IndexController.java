@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.retailerp.common.util.CookieUtils;
 import com.retailerp.pojo.sys.Menu;
 
 @Controller

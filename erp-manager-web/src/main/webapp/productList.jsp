@@ -20,7 +20,7 @@
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 --> 
  
 <script>
-window.parent.showDialog("${pageContext.request.contextPath}/dialog.jsp",this,function(callback){ alert(callback) });
+//window.parent.showDialog("${pageContext.request.contextPath}/dialog.jsp",this,function(callback){ alert(callback) });
 layui.use('table', function(){
   var table = layui.table;
   table.render({

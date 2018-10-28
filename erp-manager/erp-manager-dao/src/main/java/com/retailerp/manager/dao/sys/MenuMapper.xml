@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.retailerp.manager.dao.sys.MenuMapper">
+	<select id="findMenuByRoleIds" parameterType="java.util.List"
+		resultType="com.retailerp.pojo.sys.Menu">
+		select DISTINCT m.* from sys_menu m inner join sys_roleInMenu rm
+		on m.id = rm.menuId
+		<where>
+			<if test="list!=null and list.size() > 0">
+				and rm.roleId in 
+				<foreach collection="list" item="item" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</select>
+</mapper>

@@ -16,14 +16,14 @@
                 <i class="layui-icon layui-icon-username admin-icon admin-icon-username"></i>
                 <input type="text" name="username" placeholder="请输入用户名"
                        autocomplete="off"
-                       class="layui-input admin-input admin-input-username">
+                       class="layui-input admin-input admin-input-username" value="zhengxiaoyong" />
             </div>
             <div>
                 <i class="layui-icon layui-icon-password admin-icon admin-icon-password"></i>
                 <input type="password" name="password"
                        placeholder="请输入密码"
                        autocomplete="off"
-                       class="layui-input admin-input">
+                       class="layui-input admin-input" value="123456" />
             </div>
             <div>
                 <input type="text" name="verify"
@@ -37,7 +37,8 @@
     </div>
 </div>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.10.2.min.js""></script>
-<script src="${pageContext.request.contextPath }/plugins/layui/layui.js"></script>
+
+<script src="${pageContext.request.contextPath }/plugins/layui/layui.all.js"></script>
 
 <script type="text/javascript">
 	$(".admin-button").click(function(){
@@ -52,11 +53,12 @@
 					 window.location.href=url;
 				 }else{
 					 window.location.href="/";
-				 }
-					 
+				 } 
+			 }else{
+				 layer.msg(data.message);
 			 }
+				 
 		 });
-		 
 	});
 </script>
 

@@ -29,7 +29,7 @@
 	var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
 	function closeWindow() {
 		//给父页面传值
-		alert(parent);
+		console.log(parent);
 		parent.layer.close(index);
 	}
 </script>

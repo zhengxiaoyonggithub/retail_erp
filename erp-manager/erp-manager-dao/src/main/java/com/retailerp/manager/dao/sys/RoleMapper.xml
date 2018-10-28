@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.retailerp.manager.dao.sys.RoleMapper">
+
+		
+	<!-- 根据用户Id 获取角色列表 -->
+	<select id="findRolesByUserId" parameterType="java.lang.Integer" resultType="com.retailerp.pojo.sys.Role">
+		SELECT r.* FROM sys_role r INNER JOIN sys_userInRole ur 
+		ON r.id = ur.roleId 
+		WHERE ur.userId = #{userId};
+	</select>
+</mapper>

@@ -21,5 +21,6 @@
   	<module>erp-manager-interface</module>
   	<module>erp-manager-pojo</module>
   	<module>erp-manager-service</module>
+  	<module>erp-manager-dao</module>
   </modules>
 </project>

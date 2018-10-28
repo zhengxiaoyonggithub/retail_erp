@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.retailerp.manager.dao.sys.UserMapper">
+	<insert id="insertUser" parameterType="com.retailerp.pojo.sys.User">
+		insert into sys_user(loginName,password,createTime,updateTime,status)
+		values(#{loginName},#{password},#{createTime},#{updateTime},#{status})
+	</insert>
+	
+	<select id="findUserByLoginName" resultType="com.retailerp.pojo.sys.User" parameterType="java.lang.String">
+		select * from sys_user where loginName = #{loginName}
+	</select>
+</mapper>

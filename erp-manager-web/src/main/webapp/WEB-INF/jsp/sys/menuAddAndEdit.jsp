@@ -105,7 +105,7 @@
 	function closeWindow() {
 		parent.layer.close(index);
 	}
-	
+	 
 	function submitForm(){
 		var paras = {};
 		paras.id = ${menu.id};

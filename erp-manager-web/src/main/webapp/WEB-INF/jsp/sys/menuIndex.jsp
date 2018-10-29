@@ -81,13 +81,12 @@
 		    				  type: 2,
 		    				  title: "编辑菜单",
 		    				  content: "${pageContext.request.contextPath}/sys/menu/showEdit?id="+data.id,
-		    				  area: ['600px', '600px'],
+		    				  area: ['500px', '500px'],
 		    				  maxmin: true,
 		    				  end:function(){
-		    					  //closeFuc(111);
+		    					  reloadDataGrid();
 		    				  }
 		    			};
-		    	
 		    		window.parent.showDialog(option,this,function(callback){ alert(callback) });
 		    }
 		  });

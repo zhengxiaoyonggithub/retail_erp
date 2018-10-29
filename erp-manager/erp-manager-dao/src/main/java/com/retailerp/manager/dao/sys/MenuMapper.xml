@@ -44,6 +44,10 @@
 	</select>
 	
 	
+	<select id="getAllMenus" resultType="com.retailerp.pojo.sys.Menu">
+		select * from sys_menu
+	</select>
+	
 	<delete id="delMenuById" parameterType="int">
 		delete from sys_menu where id = #{id}
 	</delete>

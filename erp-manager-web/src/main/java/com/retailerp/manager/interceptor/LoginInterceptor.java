@@ -65,7 +65,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
 		// 获取用户权限信息
 		List<Menu> menus = null;
-		String menuInfo = StringUtils.EMPTY; //jedisClient.hget(USER_MENU, loginInfo.getId().toString());
+		String menuInfo = jedisClient.hget(USER_MENU, loginInfo.getId().toString());
 		if (StringUtils.isBlank(menuInfo)) {
 			List<Role> roles = roleMapper.findRolesByUserId(loginInfo.getId());
 			List<Integer> roleIds = roles.stream().map(Role::getId).collect(Collectors.toList());
@@ -74,7 +74,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 				menus = menuMapper.findMenuByRoleIds(roleIds);
 			}
 			menuInfo = JsonUtils.objectToJson(menus);
-			//jedisClient.hset(USER_MENU, loginInfo.getId().toString(), menuInfo);
+			jedisClient.hset(USER_MENU, loginInfo.getId().toString(), menuInfo);
 		}else {
 			menus = JsonUtils.jsonToList(menuInfo, Menu.class);
 		}

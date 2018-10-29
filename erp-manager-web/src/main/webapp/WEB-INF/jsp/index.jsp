@@ -108,10 +108,8 @@ $(".menuItem").click(function(){
 function showDialog(options){
 	var paras = { };
 	$.extend(paras, options);
-	console.log(paras);
 	var index = layer.open(paras);
 }
-
 
 function erp_alert(msg,t){
 	layer.alert(msg);

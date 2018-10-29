@@ -64,9 +64,10 @@ public class LoginController {
 	public ERPWebResult login(String username, String password, String verify, HttpSession session,
 			HttpServletRequest request, HttpServletResponse response) {
 		// 验证登录信息
-		if (!verify.toLowerCase().equals(session.getAttribute("code").toString().toLowerCase())) {
-			return new ERPWebResult(500, "验证码不正确");
-		}
+//		if (!verify.toLowerCase().equals(session.getAttribute("code").toString().toLowerCase())) {
+//			return new ERPWebResult(500, "验证码不正确");
+//		}
+		
 		if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
 			return new ERPWebResult(500, "用户名或密码错误");
 		}
@@ -80,6 +81,7 @@ public class LoginController {
 		LoginInfo loginInfo = new LoginInfo(user.getId(), user.getLoginName());
 		String base64LoginInfo = new String(Base64Utils.encode(JsonUtils.objectToJson(loginInfo).getBytes()));
 		CookieUtils.setCookie(request, response, LOGIN_COOKIE_NAME, base64LoginInfo);
+		
 		return ERPWebResult.ok();
 	}
 }

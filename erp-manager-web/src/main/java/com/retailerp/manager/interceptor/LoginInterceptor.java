@@ -21,6 +21,7 @@ import com.retailerp.manager.dao.sys.MenuMapper;
 import com.retailerp.manager.dao.sys.RoleMapper;
 import com.retailerp.pojo.sys.Menu;
 import com.retailerp.pojo.sys.Role;
+import com.retailerp.service.sys.MenuService;
 
 public class LoginInterceptor implements HandlerInterceptor {
 
@@ -29,18 +30,9 @@ public class LoginInterceptor implements HandlerInterceptor {
 
 	@Value("${SSO_URL}")
 	private String SSO_URL;
-
-	@Value("${USER_MENU}")
-	private String USER_MENU;
-
+	
 	@Autowired
-	private RoleMapper roleMapper;
-
-	@Autowired
-	private MenuMapper menuMapper;
-
-	@Autowired
-	private JedisClient jedisClient;
+	private MenuService menuService;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -49,7 +41,6 @@ public class LoginInterceptor implements HandlerInterceptor {
 		if (request.getRequestURL().indexOf("/page/") != -1) {
 			return true;
 		}
-
 		// 验证用户登录信息
 		String base64LoginInfo = CookieUtils.getCookieValue(request, LOGIN_COOKIE_NAME);
 		if (StringUtils.isBlank(base64LoginInfo)) {
@@ -62,22 +53,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 			response.sendRedirect(SSO_URL + "/page/login?redirect=" + request.getRequestURL());
 			return false;
 		}
-
 		// 获取用户权限信息
-		List<Menu> menus = null;
-		String menuInfo = jedisClient.hget(USER_MENU, loginInfo.getId().toString());
-		if (StringUtils.isBlank(menuInfo)) {
-			List<Role> roles = roleMapper.findRolesByUserId(loginInfo.getId());
-			List<Integer> roleIds = roles.stream().map(Role::getId).collect(Collectors.toList());
-			
-			if (roleIds != null && roleIds.size() > 0) {
-				menus = menuMapper.findMenuByRoleIds(roleIds);
-			}
-			menuInfo = JsonUtils.objectToJson(menus);
-			jedisClient.hset(USER_MENU, loginInfo.getId().toString(), menuInfo);
-		}else {
-			menus = JsonUtils.jsonToList(menuInfo, Menu.class);
-		}
+		List<Menu> menus = menuService.getMenuByUserId(loginInfo.getId());
 		request.setAttribute("menus", menus);
 		return true;
 	}

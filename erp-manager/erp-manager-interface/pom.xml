@@ -6,4 +6,13 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>erp-manager-interface</artifactId>
+  
+  
+  <dependencies>
+  	<dependency>
+  		 <groupId>com.retail</groupId>
+    	<artifactId>erp-manager-pojo</artifactId>
+    	<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
 </project>

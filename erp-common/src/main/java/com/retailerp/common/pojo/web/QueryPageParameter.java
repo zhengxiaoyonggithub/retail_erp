@@ -1,6 +1,8 @@
 package com.retailerp.common.pojo.web;
 
-public class QueryPageParameter {
+import java.io.Serializable;
+
+public class QueryPageParameter implements Serializable {
 	private int page;
 	private int limit;
 	private int startRow;

@@ -1,5 +1,6 @@
 package com.retailerp.service.impl.sys;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.retailerp.common.cache.JedisClient;
+import com.retailerp.common.pojo.web.sys.MenuQueryPageParameter;
 import com.retailerp.common.util.JsonUtils;
 import com.retailerp.manager.dao.sys.MenuMapper;
 import com.retailerp.manager.dao.sys.RoleMapper;
@@ -37,8 +39,10 @@ public class MenuServiceImpl implements MenuService {
 		String menuInfo = jedisClient.hget(USER_MENU, userId.toString());
 		if (StringUtils.isBlank(menuInfo)) {
 			List<Role> roles = roleMapper.findRolesByUserId(userId);
-			List<Integer> roleIds = roles.stream().map(Role::getId).collect(Collectors.toList());
-
+			List<Integer> roleIds = new ArrayList<>(); //roles.stream().map(Role::getId).collect(Collectors.toList());
+			for (Role role : roles) {
+				roleIds.add(role.getId());
+			}
 			if (roleIds != null && roleIds.size() > 0) {
 				menus = menuMapper.findMenuByRoleIds(roleIds);
 			}
@@ -49,6 +53,41 @@ public class MenuServiceImpl implements MenuService {
 		}
 		return menus;
 		
+	}
+
+	@Override
+	public List<Menu> findMenuByRoleIds(List<Integer> roleIds) {
+		return menuMapper.findMenuByRoleIds(roleIds);
+	}
+
+	@Override
+	public int getMenuRecordCount(MenuQueryPageParameter parameter) {
+		return menuMapper.getMenuRecordCount(parameter);
+	}
+
+	@Override
+	public List<Menu> getMenus(MenuQueryPageParameter parameter) {
+		return menuMapper.getMenus(parameter);
+	}
+
+	@Override
+	public void delMenuById(Integer id) {
+		menuMapper.delMenuById(id);
+	}
+
+	@Override
+	public Menu findMenuById(Integer id) {
+		return menuMapper.findMenuById(id);
+	}
+
+	@Override
+	public void updateMenu(Menu menu) {
+		menuMapper.updateMenu(menu);
+	}
+
+	@Override
+	public List<Menu> getAllMenus() {
+		return menuMapper.getAllMenus();
 	}
 
 }

@@ -1,13 +1,8 @@
 package com.retailerp.manager.controller;
 
 import java.io.IOException;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,17 +22,14 @@ import com.retailerp.common.pojo.web.LoginInfo;
 import com.retailerp.common.util.CaptchaUtil;
 import com.retailerp.common.util.CookieUtils;
 import com.retailerp.common.util.JsonUtils;
-import com.retailerp.manager.dao.sys.MenuMapper;
-import com.retailerp.manager.dao.sys.RoleMapper;
-import com.retailerp.manager.dao.sys.UserMapper;
-import com.retailerp.pojo.sys.Role;
 import com.retailerp.pojo.sys.User;
+import com.retailerp.service.sys.UserService;
 
 @Controller
 public class LoginController {
 
 	@Autowired
-	private UserMapper userMapper;
+	private UserService userService;
 
 	@Value("${LOGIN_COOKIE_NAME}")
 	private String LOGIN_COOKIE_NAME;
@@ -71,7 +63,7 @@ public class LoginController {
 		if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
 			return new ERPWebResult(500, "用户名或密码错误");
 		}
-		User user = userMapper.findUserByLoginName(username);
+		User user = userService.findUserByLoginName(username);
 		if (user == null) {
 			return new ERPWebResult(500, "用户名或密码错误");
 		} else if (!user.getPassword().equals(password)) {

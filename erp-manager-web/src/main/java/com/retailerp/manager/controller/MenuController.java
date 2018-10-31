@@ -1,7 +1,6 @@
 package com.retailerp.manager.controller;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,18 +15,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.retailerp.common.pojo.web.ERPWebResult;
 import com.retailerp.common.pojo.web.LayUIDataGridInfo;
-import com.retailerp.common.pojo.web.QueryPageParameter;
 import com.retailerp.common.pojo.web.sys.MenuQueryPageParameter;
-import com.retailerp.common.util.JsonUtils;
-import com.retailerp.manager.dao.sys.MenuMapper;
-import com.retailerp.manager.dao.sys.UserMapper;
 import com.retailerp.pojo.sys.Menu;
+import com.retailerp.service.sys.MenuService;
 
 @Controller
 public class MenuController {
 
 	@Autowired
-	private MenuMapper menuMapper;
+	private MenuService menuService;
 
 	@InitBinder
 	public void intDate(WebDataBinder dataBinder) {
@@ -48,8 +44,8 @@ public class MenuController {
 		}
 		// 查询数据
 		LayUIDataGridInfo<Menu> dataGridInfo = new LayUIDataGridInfo<>();
-		int recordNum = menuMapper.getMenuRecordCount(parameter);
-		List<Menu> datas = menuMapper.getMenus(parameter);
+		int recordNum = menuService.getMenuRecordCount(parameter);
+		List<Menu> datas = menuService.getMenus(parameter);
 
 		// 设置返回数据
 		dataGridInfo.setCode(0);
@@ -65,7 +61,7 @@ public class MenuController {
 		if (id == null || id <= 0) {
 			return new ERPWebResult(500, "数据异常");
 		} else {
-			menuMapper.delMenuById(id);
+			menuService.delMenuById(id);
 		}
 		return new ERPWebResult(200, "操作成功");
 	}
@@ -74,7 +70,7 @@ public class MenuController {
 	public String editMenu(Integer id, Model model) {
 		Menu menu = new Menu();
 		if (id > 0) {
-			menu = menuMapper.findMenuById(id);
+			menu = menuService.findMenuById(id);
 		}
 		model.addAttribute("menu", menu);
 		return "sys/menuAddAndEdit";
@@ -84,13 +80,13 @@ public class MenuController {
 	@ResponseBody
 	public ERPWebResult editMenu(Menu menu) {
 		menu.setUpdateTime(new Date());
-		menuMapper.updateMenu(menu);
+		menuService.updateMenu(menu);
 		return new ERPWebResult(200, "successful");
 	}
 
 	@RequestMapping("/sys/menu/getMenuSelect")
 	@ResponseBody
 	public List<Menu> getAllMenus() {
-		return menuMapper.getAllMenus();
+		return menuService.getAllMenus();
 	}
 }

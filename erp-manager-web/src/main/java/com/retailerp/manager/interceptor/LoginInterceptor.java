@@ -21,6 +21,7 @@ import com.retailerp.manager.dao.sys.MenuMapper;
 import com.retailerp.manager.dao.sys.RoleMapper;
 import com.retailerp.pojo.sys.Menu;
 import com.retailerp.pojo.sys.Role;
+import com.retailerp.service.TestService;
 import com.retailerp.service.sys.MenuService;
 
 public class LoginInterceptor implements HandlerInterceptor {

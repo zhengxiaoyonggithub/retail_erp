@@ -1,8 +1,10 @@
 package com.retailerp.common.pojo.web;
 
+import java.io.Serializable;
+
 import org.apache.commons.lang3.StringUtils;
 
-public class ERPWebResult {
+public class ERPWebResult implements Serializable {
 	private Integer status;
 	private String message;
 	

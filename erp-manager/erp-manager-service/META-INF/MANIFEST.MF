@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: erp-manager-service
+Bundle-SymbolicName: erp-manager-service
+Bundle-Version: 1.0.0.qualifier
+Export-Package: com.retailerp.service.impl.sys

@@ -21,7 +21,7 @@
 		<druid.version>1.0.9</druid.version>
 		<mysql.version>5.1.32</mysql.version>
 		<jedis.version>2.9.0</jedis.version>
-		<dubbo.version>2.6.4</dubbo.version>
+		<dubbo.version>2.5.3</dubbo.version>
 		<zookeeper.version>3.4.6</zookeeper.version>
 		<zkclient.version>0.1</zkclient.version>
 	</properties>

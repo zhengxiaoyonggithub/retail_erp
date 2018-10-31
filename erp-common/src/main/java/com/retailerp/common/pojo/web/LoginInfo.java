@@ -1,8 +1,9 @@
 package com.retailerp.common.pojo.web;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class LoginInfo {
+public class LoginInfo implements Serializable {
 	private Integer id;
 	private String loginName;
 

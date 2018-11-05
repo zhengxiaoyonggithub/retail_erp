@@ -10,7 +10,7 @@ public class TestServiceImpl implements TestService {
 	@Override
 	public void add() {
 		// TODO Auto-generated method stub
-		System.out.println(111222);
+		System.out.println(111222); 
 	}
 
 }
